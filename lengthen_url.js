@@ -85,7 +85,7 @@ LengthenURL.prototype.invoke = function(imports, channel, sysImports, contentPar
         });
     } else {
         // silent passthrough
-        next(false, imports);
+        next(false, exports);
     }
 }
 

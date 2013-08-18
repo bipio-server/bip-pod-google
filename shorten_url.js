@@ -84,7 +84,7 @@ ShortenURL.prototype.invoke = function(imports, channel, sysImports, contentPart
         });
     } else {
         // silent passthrough
-        next(false, imports);
+        next(false, exports);
     }
 }
 
