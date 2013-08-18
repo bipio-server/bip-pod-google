@@ -26,7 +26,7 @@ function ShortenURL(podConfig) {
     this.description = 'Shorten a URL',
     this.description_long = 'Create a new shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
     this.trigger = false;
-    this.singleton = false;
+    this.singleton = true;
     this.podConfig = podConfig;
 }
 
