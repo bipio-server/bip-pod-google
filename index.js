@@ -1,6 +1,6 @@
 /**
  * 
- * The Bipio Soundcloud Pod.  Soundcloud Actions and Content Emitters
+ * The Bipio Google Pod.  Google Actions and Content Emitters
  * 
  * @author Michael Pearson <michael@cloudspark.com.au>
  * Copyright (c) 2010-2013 CloudSpark pty ltd http://www.cloudspark.com.au
@@ -19,13 +19,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 var Pod = require('bip-pod'),
-    Soundcloud = new Pod({
-        name : 'Soundcloud',
-        description : 'Soundcloud',
-        authType : 'oauth'        
+    Google = new Pod({
+        name : 'google',
+        description : 'Google',
+        authType : 'none' // @todo hybrid api keys/oauth tokens
     });
 
-Soundcloud.add(require('./get_favorites.js'));
+Google.add(require('./lengthen_url.js'));
+Google.add(require('./shorten_url.js'));
 
 // -----------------------------------------------------------------------------
-module.exports = Soundcloud;
+module.exports = Google;
