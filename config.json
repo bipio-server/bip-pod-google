@@ -1,0 +1,9 @@
+{
+    "oauth": {
+       "consumerKey" : "",
+       "consumerSecret" : ""
+    },
+    "issuer_token" : {
+        "password" : ""        
+    }
+}

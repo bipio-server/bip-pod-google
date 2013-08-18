@@ -1,0 +1,36 @@
+{
+    "name": "bip-pod-google",
+    "version": "0.0.1",
+    "description": "Google Pod for Bipio",
+    "keywords": [
+    "bip",
+    "bipio",
+    "pod",
+    "google"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/bipio-server/bip-pod-google.git"
+    },
+    "bugs": {
+        "url": "http://github.com/bipio-server/bip-pod-google/issues"
+    },
+    "licenses": [
+    {
+        "type": "GNU GPLv3",
+        "url": "http://www.gnu.org/copyleft/gpl.html"
+    }
+    ],
+    "main": ".",
+    "dependencies": {
+        "pkginfo": "0.2.x",
+        "bip-pod" : ">=0.0.1",
+        "passport-google-oauth" : ">=0.1.5",
+        "googleapis" : ">=0.2.13-alpha",
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "_id": "bip-pod-google@0.0.1",
+    "_from": "bip-pod-google@>=0.0.0"
+}
