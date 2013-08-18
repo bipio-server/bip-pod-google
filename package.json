@@ -26,7 +26,7 @@
         "pkginfo": "0.2.x",
         "bip-pod" : ">=0.0.1",
         "passport-google-oauth" : ">=0.1.5",
-        "googleapis" : ">=0.2.13-alpha",
+        "googleapis" : ">=0.2.13-alpha"
     },
     "engines": {
         "node": ">= 0.10.0"
