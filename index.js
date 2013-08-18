@@ -22,6 +22,7 @@ var Pod = require('bip-pod'),
     Google = new Pod({
         name : 'google',
         description : 'Google',
+        description_long : 'Google APIs is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
         authType : 'none' // @todo hybrid api keys/oauth tokens
     });
 
