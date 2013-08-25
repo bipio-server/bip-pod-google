@@ -24,11 +24,14 @@ var Pod = require('bip-pod'),
         description : 'Google',
         description_long : 'Google APIs is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
         authType : 'none', // @todo hybrid api keys/oauth tokens
+        passportStrategy : require('passport-google-oauth').Strategy,
         config : {
+            // oauth application keys
             "oauth": {
                "consumerKey" : "",
                "consumerSecret" : ""
             },
+            // google api key
             "issuer_token" : {
                 "password" : ""        
             }

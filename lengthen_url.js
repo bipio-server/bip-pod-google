@@ -79,6 +79,7 @@ LengthenURL.prototype.invoke = function(imports, channel, sysImports, contentPar
                     log(err, channel, 'error');
                     // @todo notify user
                 }
+                
                 next(err, exports);
             });
 
