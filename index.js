@@ -23,16 +23,20 @@ var Pod = require('bip-pod'),
         name : 'google',
         description : 'Google',
         description_long : 'Google APIs is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
-        authType : 'none', // @todo hybrid api keys/oauth tokens
-        passportStrategy : require('passport-google-oauth').Strategy,
+        authType : 'oauth', // @todo hybrid api keys/oauth tokens
+        passportStrategy : require('passport-google-oauth').OAuth2Strategy,
         config : {
             // oauth application keys
             "oauth": {
-               "consumerKey" : "",
-               "consumerSecret" : ""
+               "clientID" : "",
+               "clientSecret" : "",
+               "callbackURL" : "",
+               "scopes" : [
+                 "https://www.googleapis.com/auth/calendar"
+               ]
             },
             // google api key
-            "issuer_token" : {
+            "api_key" : {
                 "password" : ""        
             }
         }
@@ -40,6 +44,10 @@ var Pod = require('bip-pod'),
 
 Google.add(require('./lengthen_url.js'));
 Google.add(require('./shorten_url.js'));
+//Google.add(require('./gcm_chrome.js'));
+//Google.add(require('./calendar_ev_insert.js'));
+Google.add(require('./calendar_ev_quickadd.js'));
 
 // -----------------------------------------------------------------------------
 module.exports = Google;
+
