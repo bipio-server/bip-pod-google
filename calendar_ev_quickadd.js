@@ -120,21 +120,16 @@ CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, 
     pod = this.pod;
 
   if (imports.text) {
-    var calendarId = sysImports.auth.oauth.profile.email;
+    var calendarId = sysImports.auth.oauth.profile.email;    
+    
     gapi.discover('calendar', 'v3').execute(function(err, client) {
-      var OAuth2 = gapi.auth.OAuth2Client,
-        oauth2Client = new OAuth2(self.podConfig.oauth.clientID, self.podConfig.oauth.clientSecret, self.podConfig.oauth.callbackURL);
-        
-      oauth2Client.credentials = {
-        access_token : sysImports.auth.oauth.token
-      };
- 
+      var authClient = self.pod.getOAuthClient(sysImports);
       var params = {
         calendarId : calendarId,
         text : imports.text
       }
 
-      client.calendar.events.quickAdd(params).withAuthClient(oauth2Client).execute(function(err, result) {
+      client.calendar.events.quickAdd(params).withAuthClient(authClient).execute(function(err, result) {
         var exports = {};
         if (err) {
           log(err, channel, 'error');
