@@ -20,6 +20,7 @@
  */
 var Pod = require('bip-pod'),
 gapi = require('googleapis'),
+https = require('https'),
 Google = new Pod({
   name : 'google',
   description : 'Google',
@@ -34,14 +35,58 @@ Google = new Pod({
       "callbackURL" : "",
       "scopes" : [
         "https://www.googleapis.com/auth/calendar",
-        "https://www.googleapis.com/auth/calendar",
         "https://www.google.com/m8/feeds",
         "https://www.googleapis.com/auth/userinfo.email",
         "https://www.googleapis.com/auth/userinfo.profile"
-      ]
+      ],
+      "extras" : {
+        "accessType" : "offline",
+        "approvalPrompt" : "force"
+      }
     },
     // google api key
     "api_key" : ""
+  },
+  oAuthRefresh : function(refreshToken, next) {
+    var c = this._config;
+    
+    // @see https://developers.google.com/accounts/docs/OAuth2WebServer#refresh
+    var options = {
+        hostname : 'accounts.google.com',
+        method : 'POST',
+        path : '/o/oauth2/token',
+        headers : {
+          'Content-Type' : 'application/x-www-form-urlencoded'
+        }
+      },
+      postBody = 'grant_type=refresh_token'
+          + '&client_id=' + c.oauth.clientID
+          + '&client_secret=' + c.oauth.clientSecret
+          + '&refresh_token=' + refreshToken;
+    
+    // @todo migrate into pod/request
+    var req = https.request(options, function(res) {
+      var bodyTxt = '';
+      
+      res.on('data', function(d) {
+        bodyTxt += d.toString();
+      });
+      
+      res.on('end', function(d) {       
+        if (200 === res.statusCode) {
+          next(false, JSON.parse(bodyTxt));
+        } else {
+          next(res.statusCode + ':' + d);
+        }
+      })
+    });
+
+    req.write(postBody);
+    req.end();
+
+    req.on('error', function(e) {
+      next(e);
+    });
   }
 });
 
