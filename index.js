@@ -112,7 +112,7 @@ Google.getAPIKey = function() {
 Google.add(require('./lengthen_url.js'));
 Google.add(require('./shorten_url.js'));
 //Google.add(require('./gcm_chrome.js'));
-//Google.add(require('./calendar_ev_insert.js'));
+Google.add(require('./calendar_ev_insert.js'));
 Google.add(require('./calendar_ev_quickadd.js'));
 
 // -----------------------------------------------------------------------------
