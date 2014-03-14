@@ -3,7 +3,7 @@
  * The Bipio Google Pod.  Google Actions and Content Emitters
  *
  * @author Michael Pearson <michael@cloudspark.com.au>
- * Copyright (c) 2010-2013 CloudSpark pty ltd http://www.cloudspark.com.au
+ * Copyright (c) 2010-2014 CloudSpark pty ltd http://www.cloudspark.com.au
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ https = require('https'),
 Google = new Pod({
   name : 'google',
   description : 'Google',
-  description_long : 'Google APIs is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
+  description_long : '<a href="https://developers.google.com/apis-explorer">Google APIs</a> is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
   authType : 'oauth', // @todo hybrid api keys/oauth tokens
   passportStrategy : require('passport-google-oauth').OAuth2Strategy,
   config : {
@@ -37,7 +37,8 @@ Google = new Pod({
         "https://www.googleapis.com/auth/calendar",
         "https://www.google.com/m8/feeds",
         "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile"
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/drive.file"
       ],
       "extras" : {
         "accessType" : "offline",
@@ -114,6 +115,7 @@ Google.add(require('./shorten_url.js'));
 //Google.add(require('./gcm_chrome.js'));
 Google.add(require('./calendar_ev_insert.js'));
 Google.add(require('./calendar_ev_quickadd.js'));
+Google.add(require('./create_drive_file.js'));
 
 // -----------------------------------------------------------------------------
 module.exports = Google;
