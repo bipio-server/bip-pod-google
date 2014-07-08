@@ -125,7 +125,7 @@ CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, 
     gapi.discover('calendar', 'v3').execute(function(err, client) {
       var authClient = self.pod.getOAuthClient(sysImports);
       var params = {
-        calendarId : calendarId,
+        calendarId : calendarId || 'primary',
         text : imports.text
       }
 
