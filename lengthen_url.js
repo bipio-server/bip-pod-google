@@ -23,10 +23,10 @@ var gapi = require('googleapis');
 
 function LengthenURL(podConfig) {
     this.name = 'lengthen_url';
-    this.description = 'Lengthen a URL',
-    this.description_long = 'Lengthens an existing shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',    
-    this.trigger = false; 
-    this.singleton = true;    
+    this.title = 'Lengthen a URL',
+    this.description = 'Lengthens an existing shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
+    this.trigger = false;
+    this.singleton = true;
     this.podConfig = podConfig;
 }
 
@@ -34,7 +34,7 @@ LengthenURL.prototype = {};
 
 LengthenURL.prototype.getSchema = function() {
     return {
-        'exports' : {        
+        'exports' : {
             properties : {
                 'short_url' : {
                     type : 'string',
@@ -44,10 +44,11 @@ LengthenURL.prototype.getSchema = function() {
                     type : 'string',
                     description : 'Long URL'
                 }
-            }
+            },
+            required : [ 'short_url' ]
         },
-        "imports": {        
-            properties : {            
+        "imports": {
+            properties : {
                 'short_url' : {
                     type : 'string',
                     description : 'Short URL (URL ID)'
@@ -79,14 +80,11 @@ LengthenURL.prototype.invoke = function(imports, channel, sysImports, contentPar
                     log(err, channel, 'error');
                     // @todo notify user
                 }
-                
+
                 next(err, exports);
             });
 
         });
-    } else {
-        // silent passthrough
-        next(false, exports);
     }
 }
 

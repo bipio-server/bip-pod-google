@@ -23,8 +23,8 @@ var gapi = require('googleapis');
 
 function CalendarEventQuickAdd(podConfig) {
   this.name = 'calendar_ev_quickadd';
-  this.description = 'Quick-Add a Calendar Event',
-  this.description_long = "Creates an event based on a simple text string",
+  this.title = 'Quick-Add a Calendar Event',
+  this.description = "Creates an event based on a simple text string",
   this.trigger = false;
   this.singleton = true;
   this.podConfig = podConfig;
@@ -106,6 +106,7 @@ CalendarEventQuickAdd.prototype.getSchema = function() {
           description : 'Event Text'
         }
       }
+      required : [ 'text' ]
     }
   }
 }
@@ -114,14 +115,14 @@ CalendarEventQuickAdd.prototype.getSchema = function() {
  * Invokes (runs) the action.
  */
 CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
-  var self = this, 
-    exports = {}, 
-    log = this.$resource.log, 
+  var self = this,
+    exports = {},
+    log = this.$resource.log,
     pod = this.pod;
 
   if (imports.text) {
-    var calendarId = sysImports.auth.oauth.profile.email;    
-    
+    var calendarId = sysImports.auth.oauth.profile.email;
+
     gapi.discover('calendar', 'v3').execute(function(err, client) {
       var authClient = self.pod.getOAuthClient(sysImports);
       var params = {
@@ -137,14 +138,14 @@ CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, 
           exports = app._.clone(result);
           exports.start_date = result.start.date;
           exports.start_datetime = result.start.datetime;
-          exports.start_timezone = result.start.timezone;          
+          exports.start_timezone = result.start.timezone;
           exports.end_date = result.end.date;
           exports.end_datetime = result.end.datetime;
-          exports.end_timezone = result.end.timezone;          
+          exports.end_timezone = result.end.timezone;
         }
         next(err, exports);
       });
- 
+
     });
   } else {
     // silent passthrough

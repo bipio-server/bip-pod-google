@@ -23,8 +23,8 @@ var gapi = require('googleapis');
 
 function CalendarEventInsert(podConfig) {
     this.name = 'calendar_ev_insert';
-    this.description = 'Insert a Calendar Event',
-    this.description_long = "Creates a Google Calendar Event With Structured Data",
+    this.title = 'Insert a Calendar Event',
+    this.description = "Creates a Google Calendar Event With Structured Data",
     this.trigger = false;
     this.singleton = true;
     this.podConfig = podConfig;
@@ -145,7 +145,8 @@ CalendarEventInsert.prototype.getSchema = function() {
           type : 'array',
           description : 'Attendees'
         }
-      }
+      },
+      required : [ 'text' ]
     },
   }
 }
@@ -154,14 +155,14 @@ CalendarEventInsert.prototype.getSchema = function() {
  * Invokes (runs) the action.
  */
 CalendarEventInsert.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
-  var self = this, 
-    exports = {}, 
-    log = this.$resource.log, 
+  var self = this,
+    exports = {},
+    log = this.$resource.log,
     pod = this.pod;
 
   if (imports.text) {
-    var calendarId = sysImports.auth.oauth.profile.email;    
-    
+    var calendarId = sysImports.auth.oauth.profile.email;
+
     gapi.discover('calendar', 'v3').execute(function(err, client) {
       var authClient = self.pod.getOAuthClient(sysImports);
       var params = {
@@ -200,14 +201,14 @@ CalendarEventInsert.prototype.invoke = function(imports, channel, sysImports, co
           exports = app._.clone(result);
           exports.start_date = result.start.date;
           exports.start_datetime = result.start.datetime;
-          exports.start_timezone = result.start.timezone;          
+          exports.start_timezone = result.start.timezone;
           exports.end_date = result.end.date;
           exports.end_datetime = result.end.datetime;
-          exports.end_timezone = result.end.timezone;          
+          exports.end_timezone = result.end.timezone;
         }
         next(err, exports);
       });
- 
+
     });
   } else {
     // silent passthrough

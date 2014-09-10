@@ -24,8 +24,8 @@ var gapi = require('googleapis'),
 
 function CreateFile(podConfig) {
   this.name = 'create_drive_file';
-  this.description = 'Create a File on Google Drive',
-  this.description_long = "Uploads any present file to Google drive",
+  this.title = 'Create a File on Google Drive',
+  this.description = "Uploads any present file to Google drive",
   this.trigger = false;
   this.singleton = true;
   this.podConfig = podConfig;
@@ -34,7 +34,7 @@ function CreateFile(podConfig) {
 CreateFile.prototype = {};
 
 CreateFile.prototype.getSchema = function() {
-  return {    
+  return {
     'exports' : {
       properties : {
         id : {
@@ -47,9 +47,9 @@ CreateFile.prototype.getSchema = function() {
 }
 
 CreateFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
-  var self = this, 
-    exports = {}, 
-    log = this.$resource.log, 
+  var self = this,
+    exports = {},
+    log = this.$resource.log,
     pod = this.pod;
 
   gapi.discover('drive', 'v2').execute(function(err, client) {
@@ -61,7 +61,7 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
             next(err);
           } else {
             var args = {
-              title: file.name, 
+              title: file.name,
               mimeType: file.type
             }
             client.drive.files.insert(args)
@@ -73,7 +73,7 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
           }
         });
       })(contentParts._files[i]);
-    }    
+    }
   });
 
 }

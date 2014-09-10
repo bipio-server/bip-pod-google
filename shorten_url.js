@@ -23,8 +23,8 @@ var gapi = require('googleapis');
 
 function ShortenURL(podConfig) {
     this.name = 'shorten_url';
-    this.description = 'Shorten a URL',
-    this.description_long = 'Create a new shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
+    this.title = 'Shorten a URL',
+    this.description = 'Create a new shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
     this.trigger = false;
     this.singleton = true;
     this.podConfig = podConfig;
@@ -34,7 +34,7 @@ ShortenURL.prototype = {};
 
 ShortenURL.prototype.getSchema = function() {
     return {
-        'exports' : {        
+        'exports' : {
             properties : {
                 'short_url' : {
                     type : 'string',
@@ -46,8 +46,8 @@ ShortenURL.prototype.getSchema = function() {
                 }
             }
         },
-        "imports": {        
-            properties : {            
+        "imports": {
+            properties : {
                 'long_url' : {
                     type : 'string',
                     description : 'Long URL'
@@ -62,7 +62,7 @@ ShortenURL.prototype.getSchema = function() {
  */
 ShortenURL.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
     var exports = {}, log = this.$resource.log;
-    
+
     if (imports.long_url) {
         gapi.discover('urlshortener', 'v1').discover('plus', 'v1').execute(function(err, client) {
             var params = {

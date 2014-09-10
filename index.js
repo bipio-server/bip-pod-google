@@ -23,8 +23,8 @@ gapi = require('googleapis'),
 https = require('https'),
 Google = new Pod({
   name : 'google',
-  description : 'Google',
-  description_long : '<a href="https://developers.google.com/apis-explorer">Google APIs</a> is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
+  title : 'Google',
+  description : '<a href="https://developers.google.com/apis-explorer">Google APIs</a> is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
   authType : 'oauth', // @todo hybrid api keys/oauth tokens
   passportStrategy : require('passport-google-oauth').OAuth2Strategy,
   config : {
@@ -50,7 +50,7 @@ Google = new Pod({
   },
   oAuthRefresh : function(refreshToken, next) {
     var c = this._config;
-    
+
     // @see https://developers.google.com/accounts/docs/OAuth2WebServer#refresh
     var options = {
         hostname : 'accounts.google.com',
@@ -64,16 +64,16 @@ Google = new Pod({
           + '&client_id=' + c.oauth.clientID
           + '&client_secret=' + c.oauth.clientSecret
           + '&refresh_token=' + refreshToken;
-    
+
     // @todo migrate into pod/request
     var req = https.request(options, function(res) {
       var bodyTxt = '';
-      
+
       res.on('data', function(d) {
         bodyTxt += d.toString();
       });
-      
-      res.on('end', function(d) {       
+
+      res.on('end', function(d) {
         if (200 === res.statusCode) {
           next(false, JSON.parse(bodyTxt));
         } else {
@@ -93,10 +93,10 @@ Google = new Pod({
 
 Google.getOAuthClient = function(sysImports) {
   var OAuth2 = gapi.auth.OAuth2Client ? gapi.auth.OAuth2Client : gapi.auth.OAuth2,
-    podConfig = this.getConfig(),    
+    podConfig = this.getConfig(),
     oauth2Client = new OAuth2(
-      podConfig.oauth.clientID, 
-      podConfig.oauth.clientSecret, 
+      podConfig.oauth.clientID,
+      podConfig.oauth.clientSecret,
       podConfig.oauth.callbackURL
     );
 
