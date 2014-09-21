@@ -105,7 +105,7 @@ CalendarEventQuickAdd.prototype.getSchema = function() {
           type : 'string',
           description : 'Event Text'
         }
-      }
+      },
       required : [ 'text' ]
     }
   }

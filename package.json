@@ -1,6 +1,6 @@
 {
   "name": "bip-pod-google",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "author" : "Michael Pearson",
   "description": "Google Pod for Bipio",
   "keywords": [
