@@ -25,7 +25,7 @@ var gapi = require('googleapis'),
 function CreateFile(podConfig) {
   this.name = 'create_drive_file';
   this.title = 'Create a File on Google Drive',
-  this.description = "Uploads any present file to Google drive",
+  this.description = "Uploads any present file to Google drive. DEPRECATED - Please use the Google Drive Pod instead",
   this.trigger = false;
   this.singleton = true;
   this.podConfig = podConfig;
