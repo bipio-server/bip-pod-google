@@ -1,7 +1,7 @@
 {
   "name": "bip-pod-google",
-  "version": "0.0.16",
-  "author" : "Michael Pearson",
+  "version": "0.0.17",
+  "author": "Michael Pearson",
   "description": "Google Pod for Bipio",
   "keywords": [
     "bip",
@@ -25,7 +25,6 @@
   "main": ".",
   "dependencies": {
     "pkginfo": "0.2.x",
-    "bip-pod": ">=0.0.1",
     "passport-google-oauth": ">=0.1.5",
     "googleapis": "0.8.0"
   },
