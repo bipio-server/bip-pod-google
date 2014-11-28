@@ -1,8 +1,8 @@
 {
   "name": "google",
-  "title": "Google",
-  "description": "<a href=\"https://developers.google.com/apis-explorer\">Google APIs</a> is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications",
-  "url": "",
+  "title": "Google APIs",
+  "description": "Google APIs is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications",
+  "url": "https://developers.google.com/apis-explorer",
   "trackDuplicates": false,
   "config": {
     "oauth": {
@@ -49,10 +49,7 @@
             "type": "string",
             "description": "Long URL"
           }
-        },
-        "required": [
-          "short_url"
-        ]
+        }
       },
       "imports": {
         "properties": {
@@ -61,6 +58,9 @@
             "description": "Short URL (URL ID)"
           }
         },
+        "required": [
+          "short_url"
+        ],
         "disposition": [
           "short_url"
         ]
@@ -93,6 +93,9 @@
             "description": "Long URL"
           }
         },
+        "required": [
+          "long_url"
+        ],
         "disposition": [
           "long_url"
         ]

@@ -22,34 +22,8 @@ var Pod = require('bip-pod'),
 gapi = require('googleapis'),
 https = require('https'),
 Google = new Pod({
-  name : 'google',
-  title : 'Google',
-  description : '<a href="https://developers.google.com/apis-explorer">Google APIs</a> is a set of APIs developed by Google that allows interaction with Google Services and integration of rich, multimedia, search or feed-based Internet content into web applications',
-  authType : 'oauth', // @todo hybrid api keys/oauth tokens
-  passportStrategy : require('passport-google-oauth').OAuth2Strategy,
-  config : {
-    // oauth application keys
-    "oauth": {
-      "clientID" : "",
-      "clientSecret" : "",
-      "callbackURL" : "",
-      "scopes" : [
-        "https://www.googleapis.com/auth/calendar",
-        "https://www.google.com/m8/feeds",
-        "https://www.googleapis.com/auth/userinfo.email",
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/drive.file"
-      ],
-      "extras" : {
-        "accessType" : "offline",
-        "approvalPrompt" : "force"
-      }
-    },
-    // google api key
-    "api_key" : ""
-  },
   oAuthRefresh : function(refreshToken, next) {
-    var c = this._config;
+    var c = this.getConfig();
 
     // @see https://developers.google.com/accounts/docs/OAuth2WebServer#refresh
     var options = {
@@ -95,9 +69,9 @@ Google.getOAuthClient = function(sysImports) {
   var OAuth2 = gapi.auth.OAuth2Client ? gapi.auth.OAuth2Client : gapi.auth.OAuth2,
     podConfig = this.getConfig(),
     oauth2Client = new OAuth2(
-      podConfig.oauth.clientID,
-      podConfig.oauth.clientSecret,
-      podConfig.oauth.callbackURL
+      sysImports.auth.oauth.clientID || podConfig.oauth.clientID,
+      sysImports.auth.oauth.clientSecret || podConfig.oauth.clientSecret,
+      sysImports.auth.oauth.callbackURL || podConfig.oauth.callbackURL
     );
 
   oauth2Client.credentials = {
@@ -109,13 +83,6 @@ Google.getOAuthClient = function(sysImports) {
 Google.getAPIKey = function() {
   return this.getConfig().api_key;
 }
-
-Google.add(require('./lengthen_url.js'));
-Google.add(require('./shorten_url.js'));
-//Google.add(require('./gcm_chrome.js'));
-Google.add(require('./calendar_ev_insert.js'));
-Google.add(require('./calendar_ev_quickadd.js'));
-Google.add(require('./create_drive_file.js'));
 
 // -----------------------------------------------------------------------------
 module.exports = Google;

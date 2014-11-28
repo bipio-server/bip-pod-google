@@ -21,95 +21,9 @@
  */
 var gapi = require('googleapis');
 
-function CalendarEventQuickAdd(podConfig) {
-  this.name = 'calendar_ev_quickadd';
-  this.title = 'Quick-Add a Calendar Event',
-  this.description = "Creates an event based on a simple text string",
-  this.trigger = false;
-  this.singleton = true;
-  this.podConfig = podConfig;
-}
+function CalendarEventQuickAdd() {}
 
 CalendarEventQuickAdd.prototype = {};
-
-CalendarEventQuickAdd.prototype.getSchema = function() {
-  return {
-    /*
-    config : {
-      properties : {
-        calendarId: {
-          type : "string",
-          description : "Calendar ID"
-        }
-      }
-    },*/
-    'exports' : {
-      properties : {
-        status : {
-          type : 'string',
-          description : 'Status'
-        },
-        id : {
-          type : 'string',
-          description : 'ID'
-        },
-        created : {
-          type : 'string',
-          description : 'Created Time'
-        },
-        summary : {
-          type : 'string',
-          description : 'Summary'
-        },
-        description : {
-          type : 'string',
-          description : 'Description'
-        },
-        location : {
-          type : 'string',
-          description : 'Location'
-        },
-        start_date : {
-          type : 'string',
-          description : 'Start Date'
-        },
-        start_datetime : {
-          type : 'string',
-          description : 'Start DateTime'
-        },
-        start_timezone : {
-          type : 'string',
-          description : 'Start TimeZone'
-        },
-        end_date : {
-          type : 'string',
-          description : 'End Date'
-        },
-        end_datetime : {
-          type : 'string',
-          description : 'End DateTime'
-        },
-        end_timezone : {
-          type : 'string',
-          description : 'End TimeZone'
-        },
-        attendees : {
-          type : 'array',
-          description : 'Attendees'
-        }
-      }
-    },
-    "imports": {
-      properties : {
-        'text' : {
-          type : 'string',
-          description : 'Event Text'
-        }
-      },
-      required : [ 'text' ]
-    }
-  }
-}
 
 /**
  * Invokes (runs) the action.
@@ -120,8 +34,8 @@ CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, 
     log = this.$resource.log,
     pod = this.pod;
 
-  if (imports.text) {
-    var calendarId = sysImports.auth.oauth.profile.email;
+  try {
+    var calendarId = JSON.parse(sysImports.auth.oauth.profile).email;
 
     gapi.discover('calendar', 'v3').execute(function(err, client) {
       var authClient = self.pod.getOAuthClient(sysImports);
@@ -147,9 +61,8 @@ CalendarEventQuickAdd.prototype.invoke = function(imports, channel, sysImports, 
       });
 
     });
-  } else {
-    // silent passthrough
-    next(false, exports);
+  } catch (e) {
+    next(e);
   }
 }
 

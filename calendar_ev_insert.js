@@ -21,135 +21,9 @@
  */
 var gapi = require('googleapis');
 
-function CalendarEventInsert(podConfig) {
-    this.name = 'calendar_ev_insert';
-    this.title = 'Insert a Calendar Event',
-    this.description = "Creates a Google Calendar Event With Structured Data",
-    this.trigger = false;
-    this.singleton = true;
-    this.podConfig = podConfig;
-}
+function CalendarEventInsert(podConfig) {}
 
 CalendarEventInsert.prototype = {};
-
-CalendarEventInsert.prototype.getSchema = function() {
-  return {
-    /*
-    config : {
-      properties : {
-        calendarId: {
-          type : "string",
-          description : "Calendar ID"
-        }
-      }
-    },*/
-    'exports' : {
-      properties : {
-        status : {
-          type : 'string',
-          description : 'Status'
-        },
-        id : {
-          type : 'string',
-          description : 'ID'
-        },
-        created : {
-          type : 'string',
-          description : 'Created Time'
-        },
-        summary : {
-          type : 'string',
-          description : 'Summary'
-        },
-        description : {
-          type : 'string',
-          description : 'Description'
-        },
-        location : {
-          type : 'string',
-          description : 'Location'
-        },
-        start_date : {
-          type : 'string',
-          description : 'Start Date'
-        },
-        start_datetime : {
-          type : 'string',
-          description : 'Start DateTime'
-        },
-        start_timezone : {
-          type : 'string',
-          description : 'Start TimeZone'
-        },
-        end_date : {
-          type : 'string',
-          description : 'End Date'
-        },
-        end_datetime : {
-          type : 'string',
-          description : 'End DateTime'
-        },
-        end_timezone : {
-          type : 'string',
-          description : 'End TimeZone'
-        },
-        attendees : {
-          type : 'array',
-          description : 'Attendees'
-        }
-      }
-    },
-    'imports' : {
-      properties : {
-        attendees_emails : {
-          type : 'string',
-          description : 'Comma Separated Attendee Emails'
-        },
-        reminder_method : {
-          type : 'string',
-          description : 'Reminder Method (email|sms|popup)'
-        },
-        reminder_minutes : {
-          type : 'integer',
-          description : '# Minutes Prior to send Reminder'
-        },
-        location : {
-          type : 'string',
-          description : 'Location'
-        },
-        start_date : {
-          type : 'string',
-          description : 'Start Date'
-        },
-        start_datetime : {
-          type : 'string',
-          description : 'Start DateTime'
-        },
-        start_timezone : {
-          type : 'string',
-          description : 'Start TimeZone'
-        },
-        end_date : {
-          type : 'string',
-          description : 'End Date'
-        },
-        end_datetime : {
-          type : 'string',
-          description : 'End DateTime'
-        },
-        end_timezone : {
-          type : 'string',
-          description : 'End TimeZone'
-        },
-        attendees : {
-          type : 'array',
-          description : 'Attendees'
-        }
-      },
-      required : [ 'text' ]
-    },
-  }
-}
 
 /**
  * Invokes (runs) the action.
@@ -160,8 +34,8 @@ CalendarEventInsert.prototype.invoke = function(imports, channel, sysImports, co
     log = this.$resource.log,
     pod = this.pod;
 
-  if (imports.text) {
-    var calendarId = sysImports.auth.oauth.profile.email;
+  try {
+    var calendarId = JSON.parse(sysImports.auth.oauth.profile).email;
 
     gapi.discover('calendar', 'v3').execute(function(err, client) {
       var authClient = self.pod.getOAuthClient(sysImports);
@@ -208,11 +82,9 @@ CalendarEventInsert.prototype.invoke = function(imports, channel, sysImports, co
         }
         next(err, exports);
       });
-
     });
-  } else {
-    // silent passthrough
-    next(false, exports);
+  } catch (e) {
+    next(e);
   }
 }
 

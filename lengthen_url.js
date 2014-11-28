@@ -21,42 +21,9 @@
  */
 var gapi = require('googleapis');
 
-function LengthenURL(podConfig) {
-    this.name = 'lengthen_url';
-    this.title = 'Lengthen a URL',
-    this.description = 'Lengthens an existing shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
-    this.trigger = false;
-    this.singleton = true;
-    this.podConfig = podConfig;
-}
+function LengthenURL() {}
 
 LengthenURL.prototype = {};
-
-LengthenURL.prototype.getSchema = function() {
-    return {
-        'exports' : {
-            properties : {
-                'short_url' : {
-                    type : 'string',
-                    description : 'Short URL (URL ID)'
-                },
-                'long_url' : {
-                    type : 'string',
-                    description : 'Long URL'
-                }
-            },
-            required : [ 'short_url' ]
-        },
-        "imports": {
-            properties : {
-                'short_url' : {
-                    type : 'string',
-                    description : 'Short URL (URL ID)'
-                }
-            }
-        }
-    }
-}
 
 /**
  * Invokes (runs) the action.
@@ -64,28 +31,25 @@ LengthenURL.prototype.getSchema = function() {
 LengthenURL.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
     var exports = {}, log = this.$resource.log;
 
-    if (imports.short_url) {
-        gapi.discover('urlshortener', 'v1').discover('plus', 'v1').execute(function(err, client) {
-            var params = {
-                shortUrl: imports.short_url
-            };
+    gapi.discover('urlshortener', 'v1').discover('plus', 'v1').execute(function(err, client) {
+        var params = {
+            shortUrl: imports.short_url
+        };
 
-            var req = client.urlshortener.url.get(params);
+        var req = client.urlshortener.url.get(params);
 
-            req.execute(function (err, response) {
-                if (!err && !response.code) {
-                    exports.short_url = response.id;
-                    exports.long_url = response.longUrl
-                } else {
-                    log(err, channel, 'error');
-                    // @todo notify user
-                }
+        req.execute(function (err, response) {
+            if (!err && !response.code) {
+                exports.short_url = response.id;
+                exports.long_url = response.longUrl
+            } else {
+                log(err, channel, 'error');
+                // @todo notify user
+            }
 
-                next(err, exports);
-            });
-
+            next(err, exports);
         });
-    }
+    });
 }
 
 // -----------------------------------------------------------------------------

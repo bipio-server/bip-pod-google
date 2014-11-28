@@ -21,71 +21,33 @@
  */
 var gapi = require('googleapis');
 
-function ShortenURL(podConfig) {
-    this.name = 'shorten_url';
-    this.title = 'Shorten a URL',
-    this.description = 'Create a new shortened URL. The Google URL Shortener API allows you to shorten URLs just as you would on goo.gl.',
-    this.trigger = false;
-    this.singleton = true;
-    this.podConfig = podConfig;
-}
+function ShortenURL() {}
 
 ShortenURL.prototype = {};
-
-ShortenURL.prototype.getSchema = function() {
-    return {
-        'exports' : {
-            properties : {
-                'short_url' : {
-                    type : 'string',
-                    description : 'Short URL (URL ID)'
-                },
-                'long_url' : {
-                    type : 'string',
-                    description : 'Long URL'
-                }
-            }
-        },
-        "imports": {
-            properties : {
-                'long_url' : {
-                    type : 'string',
-                    description : 'Long URL'
-                }
-            }
-        }
-    }
-}
 
 /**
  * Invokes (runs) the action.
  */
 ShortenURL.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
     var exports = {}, log = this.$resource.log;
+    gapi.discover('urlshortener', 'v1').discover('plus', 'v1').execute(function(err, client) {
+        var params = {
+            longUrl: imports.long_url
+        };
 
-    if (imports.long_url) {
-        gapi.discover('urlshortener', 'v1').discover('plus', 'v1').execute(function(err, client) {
-            var params = {
-                longUrl: imports.long_url
-            };
+        var req = client.urlshortener.url.insert(params);
 
-            var req = client.urlshortener.url.insert(params);
-
-            req.execute(function (err, response) {
-                if (!err) {
-                    exports.short_url = response.id;
-                    exports.long_url = response.longUrl
-                } else {
-                    log(err, channel, 'error');
-                }
-                next(err, exports);
-            });
-
+        req.execute(function (err, response) {
+            if (!err) {
+                exports.short_url = response.id;
+                exports.long_url = response.longUrl
+            } else {
+                log(err, channel, 'error');
+            }
+            next(err, exports);
         });
-    } else {
-        // silent passthrough
-        next(false, exports);
-    }
+
+    });
 }
 
 // -----------------------------------------------------------------------------

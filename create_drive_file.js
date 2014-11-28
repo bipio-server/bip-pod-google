@@ -22,29 +22,9 @@
 var gapi = require('googleapis'),
   fs = require('fs');
 
-function CreateFile(podConfig) {
-  this.name = 'create_drive_file';
-  this.title = 'Create a File on Google Drive',
-  this.description = "Uploads any present file to Google drive. DEPRECATED - Please use the Google Drive Pod instead",
-  this.trigger = false;
-  this.singleton = true;
-  this.podConfig = podConfig;
-}
+function CreateFile() {}
 
 CreateFile.prototype = {};
-
-CreateFile.prototype.getSchema = function() {
-  return {
-    'exports' : {
-      properties : {
-        id : {
-          type : 'string',
-          description : 'File ID'
-        }
-      }
-    }
-  }
-}
 
 CreateFile.prototype.invoke = function(imports, channel, sysImports, contentParts, next) {
   var self = this,
