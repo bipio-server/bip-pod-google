@@ -24,10 +24,19 @@
   },
   "auth": {
     "strategy": "oauth",
-    "passport" : {
-     "provider" : "google-oauth",
-     "strategy" : "OAuth2Strategy"
-   }
+    "passport": {
+      "provider": "google-oauth",
+      "strategy": "OAuth2Strategy"
+    },
+    "properties": {
+      "access_token": {
+        "type": "string",
+        "title": "Access Token"
+      }
+    },
+    "disposition": [
+      "access_token"
+    ]
   },
   "rpcs": {},
   "actions": {
