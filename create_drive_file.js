@@ -36,7 +36,7 @@ CreateFile.prototype.invoke = function(imports, channel, sysImports, contentPart
     var auth = self.pod.getOAuthClient(sysImports);
     for (var i = 0; i < contentParts._files.length; i++) {
       (function(file) {
-        fs.readFile(file.localpath, function(err, buffer) {
+        $resource.file.get(file.localpath, function(err, buffer) {
           if (err) {
             next(err);
           } else {
