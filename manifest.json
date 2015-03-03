@@ -52,11 +52,11 @@
         "properties": {
           "short_url": {
             "type": "string",
-            "description": "Short URL (URL ID)"
+            "title": "Short URL (URL ID)"
           },
           "long_url": {
             "type": "string",
-            "description": "Long URL"
+            "title": "Long URL"
           }
         }
       },
@@ -64,7 +64,7 @@
         "properties": {
           "short_url": {
             "type": "string",
-            "description": "Short URL (URL ID)"
+            "title": "Short URL (URL ID)"
           }
         },
         "required": [
@@ -87,11 +87,11 @@
         "properties": {
           "short_url": {
             "type": "string",
-            "description": "Short URL (URL ID)"
+            "title": "Short URL (URL ID)"
           },
           "long_url": {
             "type": "string",
-            "description": "Long URL"
+            "title": "Long URL"
           }
         }
       },
@@ -99,7 +99,7 @@
         "properties": {
           "long_url": {
             "type": "string",
-            "description": "Long URL"
+            "title": "Long URL"
           }
         },
         "required": [
@@ -122,55 +122,55 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "Status"
+            "title": "Status"
           },
           "id": {
             "type": "string",
-            "description": "ID"
+            "title": "ID"
           },
           "created": {
             "type": "string",
-            "description": "Created Time"
+            "title": "Created Time"
           },
           "summary": {
             "type": "string",
-            "description": "Summary"
+            "title": "Summary"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           },
           "location": {
             "type": "string",
-            "description": "Location"
+            "title": "Location"
           },
           "start_date": {
             "type": "string",
-            "description": "Start Date"
+            "title": "Start Date"
           },
           "start_datetime": {
             "type": "string",
-            "description": "Start DateTime"
+            "title": "Start DateTime"
           },
           "start_timezone": {
             "type": "string",
-            "description": "Start TimeZone"
+            "title": "Start TimeZone"
           },
           "end_date": {
             "type": "string",
-            "description": "End Date"
+            "title": "End Date"
           },
           "end_datetime": {
             "type": "string",
-            "description": "End DateTime"
+            "title": "End DateTime"
           },
           "end_timezone": {
             "type": "string",
-            "description": "End TimeZone"
+            "title": "End TimeZone"
           },
           "attendees": {
             "type": "array",
-            "description": "Attendees"
+            "title": "Attendees"
           }
         }
       },
@@ -178,47 +178,47 @@
         "properties": {
           "attendees_emails": {
             "type": "string",
-            "description": "Comma Separated Attendee Emails"
+            "title": "Comma Separated Attendee Emails"
           },
           "reminder_method": {
             "type": "string",
-            "description": "Reminder Method (email|sms|popup)"
+            "title": "Reminder Method (email|sms|popup)"
           },
           "reminder_minutes": {
             "type": "integer",
-            "description": "# Minutes Prior to send Reminder"
+            "title": "# Minutes Prior to send Reminder"
           },
           "location": {
             "type": "string",
-            "description": "Location"
+            "title": "Location"
           },
           "start_date": {
             "type": "string",
-            "description": "Start Date"
+            "title": "Start Date"
           },
           "start_datetime": {
             "type": "string",
-            "description": "Start DateTime"
+            "title": "Start DateTime"
           },
           "start_timezone": {
             "type": "string",
-            "description": "Start TimeZone"
+            "title": "Start TimeZone"
           },
           "end_date": {
             "type": "string",
-            "description": "End Date"
+            "title": "End Date"
           },
           "end_datetime": {
             "type": "string",
-            "description": "End DateTime"
+            "title": "End DateTime"
           },
           "end_timezone": {
             "type": "string",
-            "description": "End TimeZone"
+            "title": "End TimeZone"
           },
           "attendees": {
             "type": "array",
-            "description": "Attendees"
+            "title": "Attendees"
           }
         },
         "required": [
@@ -252,55 +252,55 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "Status"
+            "title": "Status"
           },
           "id": {
             "type": "string",
-            "description": "ID"
+            "title": "ID"
           },
           "created": {
             "type": "string",
-            "description": "Created Time"
+            "title": "Created Time"
           },
           "summary": {
             "type": "string",
-            "description": "Summary"
+            "title": "Summary"
           },
           "description": {
             "type": "string",
-            "description": "Description"
+            "title": "Description"
           },
           "location": {
             "type": "string",
-            "description": "Location"
+            "title": "Location"
           },
           "start_date": {
             "type": "string",
-            "description": "Start Date"
+            "title": "Start Date"
           },
           "start_datetime": {
             "type": "string",
-            "description": "Start DateTime"
+            "title": "Start DateTime"
           },
           "start_timezone": {
             "type": "string",
-            "description": "Start TimeZone"
+            "title": "Start TimeZone"
           },
           "end_date": {
             "type": "string",
-            "description": "End Date"
+            "title": "End Date"
           },
           "end_datetime": {
             "type": "string",
-            "description": "End DateTime"
+            "title": "End DateTime"
           },
           "end_timezone": {
             "type": "string",
-            "description": "End TimeZone"
+            "title": "End TimeZone"
           },
           "attendees": {
             "type": "array",
-            "description": "Attendees"
+            "title": "Attendees"
           }
         }
       },
@@ -308,7 +308,7 @@
         "properties": {
           "text": {
             "type": "string",
-            "description": "Event Text"
+            "title": "Event Text"
           }
         },
         "required": [
@@ -331,7 +331,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "File ID"
+            "title": "File ID"
           }
         }
       },
