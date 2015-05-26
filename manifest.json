@@ -325,7 +325,8 @@
       "trigger": "invoke",
       "config": {
         "properties": {},
-        "definitions": {}
+        "definitions": {},
+        "disposition": []
       },
       "exports": {
         "properties": {
@@ -333,10 +334,14 @@
             "type": "string",
             "title": "File ID"
           }
-        }
+        },
+        "disposition": [
+        	"id"
+        ]
       },
       "imports": {
-        "properties": {}
+        "properties": {},
+        "disposition": []
       }
     }
   },
