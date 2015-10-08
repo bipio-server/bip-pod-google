@@ -61,8 +61,8 @@ CalendarEventInsert.prototype.invoke = function(imports, channel, sysImports, co
           ]
         }
       }
-
-      var attendees = imports.attendees.split(',');
+console.log(imports);
+      var attendees = imports.attendees_emails.split(',');
       for (var i = 0; i < attendees.length; i++) {
         params.attendees.push(attendees[i].trim());
       }

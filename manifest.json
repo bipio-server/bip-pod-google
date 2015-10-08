@@ -114,6 +114,7 @@
       "title": "Insert a Calendar Event",
       "description": "Creates a Google Calendar Event With Structured Data",
       "trigger": "invoke",
+      "docref" : "https://developers.google.com/google-apps/calendar/v3/reference/events/insert",
       "config": {
         "properties": {},
         "definitions": {}
@@ -146,7 +147,8 @@
           },
           "start_date": {
             "type": "string",
-            "title": "Start Date"
+            "title": "Start Date",
+            "description" : "A combined date-time value. A time zone offset is required unless a time zone is explicitly specified in Start TimeZone."
           },
           "start_datetime": {
             "type": "string",
@@ -158,7 +160,8 @@
           },
           "end_date": {
             "type": "string",
-            "title": "End Date"
+            "title": "End Date",
+            "description" : "A combined date-time value. A time zone offset is required unless a time zone is explicitly specified in End TimeZone."
           },
           "end_datetime": {
             "type": "string",
@@ -176,13 +179,19 @@
       },
       "imports": {
         "properties": {
+           "text": {
+            "type": "string",
+            "title": "Event Description"
+          },
           "attendees_emails": {
             "type": "string",
-            "title": "Comma Separated Attendee Emails"
+            "title": "Attendee Emails",
+            "description" : "Comma Separated"
           },
           "reminder_method": {
             "type": "string",
-            "title": "Reminder Method (email|sms|popup)"
+            "title": "Reminder Method",
+            "description" : "email, sms or popup"
           },
           "reminder_minutes": {
             "type": "integer",
@@ -215,14 +224,11 @@
           "end_timezone": {
             "type": "string",
             "title": "End TimeZone"
-          },
-          "attendees": {
-            "type": "array",
-            "title": "Attendees"
           }
         },
         "required": [
-          "text"
+          "text",
+          "attendees_emails"
         ],
         "disposition": [
           "text",
@@ -235,8 +241,7 @@
           "start_timezone",
           "end_date",
           "end_datetime",
-          "end_timezone",
-          "attendees"
+          "end_timezone"
         ]
       }
     },
