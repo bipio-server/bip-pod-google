@@ -65,6 +65,10 @@ Google = new Pod({
   }
 });
 
+Google.profileReprOAuth = function(profile) {
+  return profile.displayName;
+}
+
 Google.getOAuthClient = function(sysImports) {
   var OAuth2 = gapi.auth.OAuth2Client ? gapi.auth.OAuth2Client : gapi.auth.OAuth2,
     podConfig = this.getConfig(),
