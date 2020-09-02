@@ -21,7 +21,7 @@
   "dependencies": {
     "pkginfo": "0.2.x",
     "passport-google-oauth": ">=0.1.5",
-    "googleapis": "0.8.0"
+    "googleapis": "59.0.0"
   },
   "engines": {
     "node": ">= 0.10.0"
